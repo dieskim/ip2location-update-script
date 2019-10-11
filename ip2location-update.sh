@@ -5,8 +5,9 @@
 ## 2. Download this SCRIPT
 ## 3. Place them in same folder as your destination where you want you IP2LOCATION bins
 ## 4. SET VARS BELOW
-## 5. RUN USING 'sh -x ip2location-update.sh 2>&1 | tee ip2location-update-log.txt'
-## 6. Create Cronjob to run on one of the first days of month
+## 5. CHMOD FILE - chmod 755 download.pl
+## 6. RUN USING 'sh -x ip2location-update.sh 2>&1 | tee ip2location-update-log.txt'
+## 7. Create Cronjob to run on one of the first days of month
 
 ## SET ADMIN EMAIL
 ADMINEMAIL=yourname@yourhost.com
@@ -18,9 +19,8 @@ MAILCOMMAND=mail
 ## LOGFILE
 LOGFILE=ip2location-update-log.txt
 
-## SET IP2USER AND IP2PASS
-IP2USER=yourIP2LOCATIONuser
-IP2PASS=yourIP2LOCATIONpassword
+## SET IP2TOKEN
+IP2TOKEN=TOKEN
 
 ## SET DATABASES - database you want to download + ipv6
 DATABASE=DB11LITEBIN
@@ -36,7 +36,7 @@ ZIPFILEIPV6=IP2LOCATION-LITE-DB11-IPV6.BIN.ZIP
 cd "${0%/*}"
 
 ## DOWNLOAD DATABASE
-./download.pl -package $DATABASE -login $IP2USER -password $IP2PASS
+./download.pl -package $DATABASE -token $IP2TOKEN
 
 ## UNZIP ZIPFILE
 unzip -o $ZIPFILE
@@ -45,7 +45,7 @@ unzip -o $ZIPFILE
 rm $ZIPFILE
 
 ## DOWNLOAD DATABASEIPV6
-./download.pl -package $DATABASEIPV6 -login $IP2USER -password $IP2PASS
+./download.pl -package $DATABASEIPV6 -token $IP2TOKEN
 
 ## UNZIP ZIPFILEIPV6
 unzip -o $ZIPFILEIPV6
